@@ -37,34 +37,6 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
     });
 
   // Count the total number of top-level posts (threads) i.e., threads that are not comments.
-  /*
-   Query Object:
-
-The query object { parentId: { $in: [null, undefined] } } is used to
- filter the documents.
- parentId: This is the field in the Thread collection that is being 
- queried.
- $in: This is a MongoDB operator that matches any of the values 
- specified in an array.
- [null, undefined]: This array specifies that the parentId field 
-should be either null or undefined.
-
-  What It Does:
- The code counts all documents in the Thread collection where the 
- parentId field is either null or undefined.
- This is typically used to count top-level threads or posts that do 
- not have a parent thread, indicating they are the original posts 
- rather than replies.
-
-Example Scenario:
- 
-Imagine you have a forum where users can create threads and reply to 
-them. The original threads would have parentId set to null or undefined
-, while replies would have parentId set to the ID of the thread they
-are replying to. This query helps you count all the original threads.
-  
- */
-
   const totalPostsCount = await Thread.countDocuments({
     parentId: { $in: [null, undefined] },
   }); // Get the total count of posts
@@ -264,7 +236,6 @@ export async function addCommentToThread(
     // Save the updated original thread to the database
     await originalThread.save();
 
-    //To reflect the latest changes to page
     revalidatePath(path);
   } catch (err) {
     console.error("Error while adding comment:", err);

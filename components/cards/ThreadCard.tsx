@@ -14,13 +14,11 @@ interface Props {
     image: string;
     id: string;
   };
-
   community: {
     id: string;
     name: string;
     image: string;
   } | null;
-
   createdAt: string;
   comments: {
     author: {
