@@ -21,8 +21,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { useUploadThing } from "@/lib/uploadthing";
 import { isBase64Image } from "@/lib/utils";
-import { UserValidation } from "@/lib/validations/user";
 
+import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
 
 interface Props {
@@ -61,7 +61,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     if (hasImageChanged) {
       const imgRes = await startUpload(files);
 
+      /* @ts-ignore */
       if (imgRes && imgRes[0].fileUrl) {
+        /* @ts-ignore */
         values.profile_photo = imgRes[0].fileUrl;
       }
     }

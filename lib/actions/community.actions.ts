@@ -12,7 +12,7 @@ export async function createCommunity(
   id: string,
   name: string,
   username: string,
-  image: string | undefined,
+  image: string,
   bio: string,
   createdById: string // Change the parameter name to reflect it's an id
 ) {
@@ -129,9 +129,9 @@ export async function fetchCommunities({
     // If the search string is not empty, add the $or operator to match either username or name fields.
     if (searchString.trim() !== "") {
       query.$or = [
-        // {/* @ts-ignore */}
+        /* @ts-ignore */
         { username: { $regex: regex } },
-        // {/* @ts-ignore */}
+        /* @ts-ignore */
         { name: { $regex: regex } },
       ];
     }

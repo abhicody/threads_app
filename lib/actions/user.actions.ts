@@ -119,17 +119,16 @@ export async function fetchUsers({
 
     // Create an initial query object to filter users.
     const query: FilterQuery<typeof User> = {
-      // {/* @ts-ignore */}
+      /* @ts-ignore */
       id: { $ne: userId }, // Exclude the current user from the results.
     };
 
     // If the search string is not empty, add the $or operator to match either username or name fields.
-
     if (searchString.trim() !== "") {
       query.$or = [
-        // {/* @ts-ignore */}
+        /* @ts-ignore */
         { username: { $regex: regex } },
-        // {/* @ts-ignore */};
+        /* @ts-ignore */
         { name: { $regex: regex } },
       ];
     }
